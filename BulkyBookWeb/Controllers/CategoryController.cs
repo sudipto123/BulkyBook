@@ -24,15 +24,19 @@ namespace BulkyBookWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public IActionResult Create(Category obj)
         {
-            if(ModelState.IsValid)
+            if (obj.Name == obj.DisplayOrder.ToString())
             {
-                _db.Categories.Add(category);
+                ModelState.AddModelError("name", "The Display Order cannot exactly match the Name.");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(obj);
         }
     }
 }
