@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Data;
 using BulkyBook.DataAccess.Repository.IRepository;
+using BulkyBook.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,14 @@ namespace BulkyBook.DataAccess.Repository
         public void RemoveRange(IEnumerable<T> entity)
         {
             dbSet.RemoveRange(entity);
+        }
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
+        public void Update(Category obj)
+        {
+            _db.Categories.Update(obj);
         }
     }
 }

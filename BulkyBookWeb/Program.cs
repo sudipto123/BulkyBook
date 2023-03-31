@@ -12,7 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 //Hot Reload was introduced in Dot Net 6
 //builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
