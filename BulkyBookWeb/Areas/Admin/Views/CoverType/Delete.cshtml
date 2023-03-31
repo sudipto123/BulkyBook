@@ -1,5 +1,9 @@
 ﻿@model CoverType
 
+@{
+	ViewData["Title"] = "Delete Cover Type";
+}
+
 <form method="post" asp-action="Delete">
 	<input asp-for="Id" hidden />
 	<div class="border p-3 mt-4">
