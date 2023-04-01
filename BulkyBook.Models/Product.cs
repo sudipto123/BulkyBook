@@ -33,6 +33,7 @@ namespace BulkyBook.Models
 		[Required]
 		[Range(1, 1000)]
 		public double Price100 { get; set; }
+		[Display(Name = "Image URL")]
 		public string ImageUrl { get; set; }
 		[Required]
 		[Display(Name = "Category")]
