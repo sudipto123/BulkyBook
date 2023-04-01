@@ -18,47 +18,29 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
             return View(objProductList);
         }
-        //GET 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Add(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
-
+        
         //GET
-        public IActionResult Edit(int? id)
+        public IActionResult Upsert(int? id)
         {
+            Product product = new();
             if (id == null || id == 0)
             {
-                return NotFound();
+                // Craete Product
+                return View(product);
             }
-            var productFromDbFirst = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
-
-            if (productFromDbFirst == null)
+            else
             {
-                return NotFound();
+                //Update Product
+
             }
 
-            return View(productFromDbFirst);
+            return View(product);
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Product obj)
+        public IActionResult Upsert(Product obj)
         {
             if (ModelState.IsValid)
             {
