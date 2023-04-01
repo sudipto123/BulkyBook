@@ -44,7 +44,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             {
                 // Craete Product
                 ViewBag.CategoryList = CategoryList;
-				ViewBag.CoverTypeList = CoverTypeList;
+                ViewData["CoverTypeList"] = CoverTypeList;
+
 				return View(product);
             }
             else
