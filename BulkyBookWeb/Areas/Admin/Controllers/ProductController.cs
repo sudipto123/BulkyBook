@@ -43,7 +43,9 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 			if (id == null || id == 0)
             {
                 // Craete Product
-                return View(product);
+                ViewBag.CategoryList = CategoryList;
+				ViewBag.CoverTypeList = CoverTypeList;
+				return View(product);
             }
             else
             {
