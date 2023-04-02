@@ -65,6 +65,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
+            bool isNew;
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -93,15 +94,26 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
                 if(obj.Product.Id == 0)
                 {
+                    isNew = true;
 					_unitOfWork.Product.Add(obj.Product);
 				}
                 else
                 {
+                    isNew = false;
 					_unitOfWork.Product.Update(obj.Product);
 				}
                 
                 _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
+
+                if(isNew == true)
+                {
+					TempData["success"] = "Product created successfully";
+				}
+                else
+                {
+					TempData["success"] = "Product updated successfully";
+				}
+                
                 return RedirectToAction("Index");
             }
             return View(obj);
