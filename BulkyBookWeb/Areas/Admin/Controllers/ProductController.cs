@@ -51,11 +51,13 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             else
             {
-                //Update Product
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(i => i.Id == id);
+				return View(productVM);
 
-            }
+				//Update Product
+			}
 
-            return View(productVM);
+            
         }
 
         //POST
