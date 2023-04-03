@@ -3,6 +3,7 @@ using BulkyBook.Models;
 using BulkyBook.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace BulkyBookWeb.Areas.Customer.Controllers
 {
@@ -26,10 +27,10 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
         public IActionResult Details(int id)
         {
-            ShoppingCartVM cartObj = new()
+            ShoppingCart cartObj = new()
             {
                 Count = 1,
-                Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category,CoverType")
+                Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category,CoverType")                
             };
             return View(cartObj);
         }
