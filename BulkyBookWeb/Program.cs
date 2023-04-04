@@ -19,7 +19,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 //Hot Reload was introduced in Dot Net 6
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,7 +36,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
