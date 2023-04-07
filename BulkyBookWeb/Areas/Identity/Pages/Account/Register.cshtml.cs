@@ -106,10 +106,13 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             [Required]
             public string Name { get; set; }
+            [Display(Name = "Street Address")]
             public string? StreetAddress { get; set; }
             public string? City { get; set; }
             public string State { get; set; }
+            [Display(Name = "Postal Code")]
             public string? PostalCode { get; set; }
+            [Display(Name = "Phone Number")]
             public string? PhoneNumber { get; set; }
             public string? Role { get; set; }
             [ValidateNever]
@@ -163,6 +166,15 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if(Input.Role == null)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_User_Indi);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
